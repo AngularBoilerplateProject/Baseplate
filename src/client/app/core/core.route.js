@@ -12,7 +12,7 @@
 
       if (!Auth.isLoggedIn() && privateRoutes.indexOf(data.url) >= 0) {
         console.log('DENY');
-        logger.info('You must login to view this page')
+        logger.error('You must login to view this page')
         event.preventDefault();
         $state.go('login');
       } else {
