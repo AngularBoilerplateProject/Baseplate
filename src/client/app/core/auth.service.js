@@ -2,18 +2,32 @@
 (function() {
   'use strict';
 
-  function Auth(){
+  function Auth($q, $http){
     var self = this;
+    var authed = false
+    self.isLoggedIn = isLoggedIn;
+    self.login = login;
 
     function isLoggedIn(){
       // Add whatever login logic necessary here.
-      var res = false;
-      
-      return res;
+
+      return authed;
+    }
+
+    function login(email, password, remember){
+      var defer = $q.defer();
+
+      if(email && password){
+        authed = true;
+        defer.resolve();
+      }
+
+      return defer.promise;
     }
   }
 
   angular
     .module('app.core')
     .service('Auth', Auth);
+    Auth.$inject = ['$q', '$http']
 })();
